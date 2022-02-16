@@ -23,3 +23,22 @@ class ProViewSet(viewsets.ModelViewSet):
 class CallViewSet(viewsets.ModelViewSet):
     queryset = Call.objects.all().order_by('start_date')
     serializer_class = CallSerializer
+
+    def update(self, request, pk=None):
+
+
+        ret = super().update(request, pk=pk)
+
+        print("hello update", ret)
+
+        return ret
+
+    def create(self, request, pk=None):
+
+
+        ret = super().create(request, pk=pk)
+        
+        print("hello create", ret)
+
+        return ret
+

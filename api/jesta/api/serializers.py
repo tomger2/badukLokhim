@@ -11,7 +11,7 @@ class ElderSerializer(serializers.HyperlinkedModelSerializer):
 class SonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Son
-        fields = ('name', 'age', 'phone', 'id', 'elder')
+        fields = ('name', 'phone', 'id', 'elder')
 
 class ProfessionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

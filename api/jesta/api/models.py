@@ -23,7 +23,6 @@ class Son(models.Model):
     name = models.CharField(max_length=60)
     city = models.CharField(max_length=60)
     phone = models.CharField(max_length=12)
-    age = models.IntegerField()
     elder = models.ManyToManyField('Elder')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
@@ -45,6 +44,7 @@ class Pro(models.Model):
     num_of_calls = models.IntegerField(null=True, blank=True)
     profession = models.ManyToManyField('Profession')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    reviews = models.JSONField(default="[]")
 
     def __str__(self):
         return self.name 
