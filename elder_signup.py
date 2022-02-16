@@ -6,11 +6,10 @@ class ELDER_SIGNUP_STATE(Enum):
     ASK_AGE = 2
     ASK_PHONE = 3
     ASK_ELDER_NAME = 4
-    ASK_ELDER_AGE = 5
-    ASK_ELDER_CITY = 6
-    ASK_ELDER_ADDRESS = 7
-    ASK_ELDER_APT_NUM = 8
-    ASK_ELDER_PHONE = 9
+    ASK_ELDER_CITY = 5
+    ASK_ELDER_ADDRESS = 6
+    ASK_ELDER_APT_NUM = 7
+    ASK_ELDER_PHONE = 8
 
 GRANDSON = dict()
 
@@ -20,13 +19,6 @@ def process_elder_signup(incoming_msg, STATE, SUB_STATE):
     
     if SUB_STATE is ELDER_SIGNUP_STATE.ASK_NAME:
         GRANDSON['name'] = incoming_msg
-        msg = 'הקלד את הגיל שלך:'
-        response.message(msg)
-        SUB_STATE = ELDER_SIGNUP_STATE.ASK_AGE
-        responded = True
-    
-    elif SUB_STATE is ELDER_SIGNUP_STATE.ASK_AGE:
-        GRANDSON['age'] = incoming_msg
         msg = 'הקלד את מספר הפלאפון שלך:'
         response.message(msg)
         SUB_STATE = ELDER_SIGNUP_STATE.ASK_PHONE
@@ -78,14 +70,11 @@ def process_elder_signup(incoming_msg, STATE, SUB_STATE):
         
     elif SUB_STATE is ELDER_SIGNUP_STATE.ASK_ELDER_PHONE:
         GRANDSON['elder']['phone'] = incoming_msg
-        response.message(incoming_msg)
         msg = 'מגניב, נרשמתם בהצלחה!'
         response.message(msg)
         STATE = None
         SUB_STATE = None
         responded = True
-        response.message('הנה הפרטים שלכם:')
-        response.message(GRANDSON)
         return GRANDSON, response, responded, STATE, SUB_STATE
 
     return GRANDSON, response, responded, STATE, SUB_STATE
