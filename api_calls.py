@@ -89,4 +89,33 @@ def get_profession_list():
 '''
 def push_rating(rate, request):
  '''   
+
+def get_profession_by_id(id):
+    return json.loads(requests.get(id))
+
+def display_pro(pro):
+    return 'שם  : ' + pro['name'] + '\n' + 'ערים:' \
+        + pro['active_cities'] + '\n' + 'טלפון: ' +  '\n' + \
+            + ':מקצוע' + get_profession_by_id(pro['id']) + '\n' + 'דירוג:' + pro['rank'] + '\n' +\
+                + 'ביקורות:' + pro['reviews']
+
+
+def close_call(call):
+    id = call['id']
+    url = URL_REQ + id + '/'
+    r = requests.patch(url , data={"is_open": False})
+    print(r)
     
+
+def update_ranking(pro, rank):
+    curr_id = pro['id']
+    curr_ranking = pro['rank']
+    num_of_calls = pro['num_of_calls']
+    
+    new_rank = ((curr_ranking * num_of_calls) + rank)  / (num_of_calls + 1)
+    
+    url = URL_PRO + curr_id + '/'
+    r = requests.patch(url, data={"num_of_calls" : num_of_calls + 1 , "rank" : new_rank})  
+
+
+
