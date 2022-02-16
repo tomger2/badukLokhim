@@ -13,12 +13,11 @@ input : new son details
 the function register the son in the database 
 
 '''
-def register_son(son):
+def register_son(son, elder_phone):
     reg_son = {
-        "name" : son.name,
-        "age": son.age,
-        "phone_number": son.phone,
-        "elder" : son.elder
+        "name" : son['name'],
+        "phone": son['phone'],
+        "elder" : URL_ELDERS + get_elder_id(elder_phone) + '/'
     }
     requests.post(URL_SONS, data=reg_son)
 
@@ -43,16 +42,16 @@ def register_pro(pro):
 
 def register_elder(elder):
     reg_elder = {
-        "name": elder.name,
-        "age" : elder.age,
-        "city": elder.city,
-        "address": elder.address,
-        "private_home": elder.private,
-        "apartment_num" : elder.apartment,
-        "floor": elder.floor,       
-        "phone": elder.phone
+        "name": elder['name'],
+        "age" : elder['age'],
+        "city": elder['city'],
+        "address": elder['address'],
+        "private_home": elder['private_home'],
+        "apartment_num" : elder['apartment_num'],
+        "floor": elder['floor'],       
+        "phone": elder['phone']
     }
-    requests.post(URL_ELDERS, data=reg_elder)
+    r = requests.post(URL_ELDERS, data=reg_elder)
 
 '''
 get elder information using name
@@ -69,6 +68,15 @@ def get_son(phone):
             return son          
     return []
 
+
+def get_elder_id(phone):
+    elders_list = json.loads(requests.get(URL_ELDERS).content)
+    for elder in elders_list:
+        elder_phone = elder['phone']
+        if elder_phone == phone : 
+            return elder['id']          
+    return ''
+    
 
 def get_request(id):
     requests_list = json.loads(requests.get(URL_REQ).content)
@@ -119,3 +127,19 @@ def update_ranking(pro, rank):
 
 
 
+
+'''register_elder({
+        "name": "2יוסי",
+        "age" : 5,
+        "city": "ראשון לציון",
+        "address": " 10 הנוקמים",
+        "private_home": False,
+        "apartment_num" : None,
+        "floor": None,       
+        "phone": "052-222223"
+    })
+
+register_son({"name" : "דני",
+        "phone": "00000"}, '052-222223')
+        
+        '''
