@@ -9,7 +9,7 @@ class BotState(Enum):
     HANDYMAN_RATING = 5
     MAIN_ACTION = 6
     
-    
+
 # conversation = {
 #     BotState.ELDER_SIGNUP : [('שם', 'הכנס את השם המלא שלך'), ('פלאפון', 'הכנס את מספר הפלאפון שלך')] 
 # }

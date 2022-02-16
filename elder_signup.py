@@ -1,4 +1,5 @@
 from enum import Enum
+from twilio.twiml.messaging_response import MessagingResponse
 
 class ELDER_SIGNUP_STATE(Enum):
     ASK_NAME = 1
@@ -11,10 +12,12 @@ class ELDER_SIGNUP_STATE(Enum):
     ASK_ELDER_APT_NUM = 8
     ASK_ELDER_PHONE = 9
 
-GRANDSON = {}
+GRANDSON = dict()
 
-def process_elder_signup(incoming_msg, response, responded):
-    global STATE, SUB_STATE
+def process_elder_signup(incoming_msg, STATE, SUB_STATE):
+    response = MessagingResponse()
+    responded = False
+    
     if SUB_STATE is ELDER_SIGNUP_STATE.ASK_NAME:
         GRANDSON['name'] = incoming_msg
         msg = 'הקלד את הגיל שלך:'
@@ -83,7 +86,7 @@ def process_elder_signup(incoming_msg, response, responded):
         responded = True
         response.message('הנה הפרטים שלכם:')
         response.message(GRANDSON)
-        return GRANDSON, response, responded
-    
-    return response, responded
+        return GRANDSON, response, responded, STATE, SUB_STATE
+
+    return GRANDSON, response, responded, STATE, SUB_STATE
     

@@ -58,7 +58,7 @@ def bot():
         #     responded = True
             
     elif STATE is BotState.ELDER_SIGNUP:
-        grandson, response, responded = process_elder_signup(incoming_msg, response, responded)
+        grandson, response, responded, STATE, SUB_STATE = process_elder_signup(incoming_msg, STATE, SUB_STATE)
  
     if not responded:
        response.message(':) נסה בבקשה להיצמד לפורמט המבוקש')
