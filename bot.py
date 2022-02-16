@@ -72,7 +72,7 @@ def bot():
         handyman, response, responded, STATE, SUB_STATE = process_handyman_signup(incoming_msg, STATE, SUB_STATE)
 
     elif STATE is BotState.HANDYMAN_RATING:
-        response, responded = process_close_request(incoming_msg, response, responded)
+        response, responded = process_close_request(incoming_msg, STATE, SUB_STATE)
         
     if not responded:
        response.message('נסה בבקשה להיצמד לפורמט המבוקש :)')

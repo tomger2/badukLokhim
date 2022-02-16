@@ -6,10 +6,12 @@ class CLOSE_REQUEST_STATE(Enum):
     ASK_ID = 2, 
     ASK_DESCRIPTION = 3,
     GIVE_RAITING = 4,
+    UPDATE_RATING = 5
     
 
-def process_close_request(incoming_msg, response, responded):
-    global STATE, SUB_STATE
+def process_close_request(incoming_msg, STATE, SUB_STATE):
+    response = MessagingResponse()
+    responded = False
     
     if SUB_STATE is CLOSE_REQUEST_STATE.ASK_ID:
         msg = 'הקלד את מספר הפנייה:'
@@ -30,6 +32,8 @@ def process_close_request(incoming_msg, response, responded):
         msg = 'הכנס דירוג לעבודה שבוצעה : '
         response.message(msg)
         responded = True
-        SUB_STATE = None
+    elif SUB_STATE is CLOSE_REQUEST_STATE.UPDATE_RATING:
+        
+        
         
         
