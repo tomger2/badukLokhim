@@ -5,7 +5,7 @@ URL_SONS = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.ope
 URL_ELDERS = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/elders/'
 URL_PRO = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/pro/'
 URL_REQ = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/call/'
-
+URL_PROF = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/professions/'
 '''
 register_son
 input : new son details 
@@ -78,3 +78,17 @@ def get_request(id):
             return req 
     return []
 
+
+def get_profession_list():
+    prof_list = json.loads(requests.get(URL_PROF).content)
+    prof_string_list = [] 
+    for prof in prof_list:
+        prof_string_list = prof_string_list + [prof['title']]
+    return prof_string_list
+
+
+get_profession_list()
+'''
+def push_rating(rate, request):
+ '''   
+    
