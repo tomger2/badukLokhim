@@ -16,7 +16,7 @@ class Pro:
         self.age = age
         self.city = city
         self.phone = phone
-        self.profession
+        self.profession = profession
 
 class Elder:
     def __init__(self, name, city, phone):
