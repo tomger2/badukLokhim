@@ -5,6 +5,6 @@ WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
-RUN python3 api/manage.py makemigrations
-RUN python3 api/manage.py migrate
-CMD ["python3", "api/manage.py", "runserver", "8080"]
+RUN python3 api/jesta/manage.py makemigrations
+RUN python3 api/jesta/manage.py migrate
+CMD ["python3", "api/jesta/manage.py", "runserver", "8080"]
