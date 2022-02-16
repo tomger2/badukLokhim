@@ -1,17 +1,17 @@
 from rest_framework import serializers
 
-from .models import Elder, Pro, Son, Profession
+from .models import Call, Elder, Pro, Son, Profession
 
 
 class ElderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Elder
-        fields = ('first_name', 'second_name', 'city', 'phone_number', 'id')
+        fields = ('name', 'age', 'city', 'address', 'private_home', 'apartment_num', 'floor', 'phone')
 
 class SonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Son
-        fields = ('first_name', 'second_name', 'city', 'phone_number', 'age', 'id', 'elder')
+        fields = ('name', 'age', 'phone', 'id', 'elder')
 
 class ProfessionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -21,4 +21,9 @@ class ProfessionSerializer(serializers.HyperlinkedModelSerializer):
 class ProSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pro
-        fields = ('first_name', 'second_name', 'city', 'phone_number', 'id', 'profession')
+        fields = ('name', 'active_cities', 'phone', 'id', 'profession', 'rank', 'num_of_calls')
+
+class CallSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Call
+        fields = ('elder', 'grandson', 'is_open', 'is_occupied', 'description', 'handy_man_pool', 'handy_man', 'cost', 'start_date', 'closed_date', 'destination', 'profession')
