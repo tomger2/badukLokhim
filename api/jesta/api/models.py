@@ -11,10 +11,10 @@ class Elder(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return self.first_name + '' + self.second_name
+        return self.first_name + ' ' + self.second_name
 
 class Son(models.Model):
-    first_name = models.CharField(max_length=60)
+    first_name = models.CharField(max_length=61)
     second_name = models.CharField(max_length=60)
     city = models.CharField(max_length=60)
     phone_number = models.CharField(max_length=12)
@@ -23,24 +23,25 @@ class Son(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return self.first_name + '' + self.second_name
+        return self.first_name + ' ' + self.second_name
 
-class Proffesion(models.Model):
+class Profession(models.Model):
     title = models.CharField(max_length=60)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return title
+        return self.title
 
 class Pro(models.Model):
     first_name = models.CharField(max_length=60)
     second_name = models.CharField(max_length=60)
     city = models.CharField(max_length=60)
     phone_number = models.CharField(max_length=12)
-    profession = models.ManyToManyField('Proffesion')
+    profession = models.ManyToManyField('Profession')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return self.first_name + '' + self.second_name
+        return self.first_name + ' ' + self.second_name
 
 class Call(models.Model):
     elder = models.ForeignKey('Elder', on_delete=models.CASCADE)
