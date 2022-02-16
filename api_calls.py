@@ -4,7 +4,7 @@ import json
 URL_SONS = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/sons/'
 URL_ELDERS = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/elders/'
 URL_PRO = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/pro/'
-
+URL_REQ = 'http://baduk-lokhim-git-group6.apps.cluster-9cdf.9cdf.sandbox537.opentlc.com/call/'
 
 '''
 register_son
@@ -67,5 +67,14 @@ def get_son(phone):
         son_phone = son['phone']
         if son_phone == phone : 
             return son          
+    return []
+
+
+def get_request(id):
+    requests_list = json.loads(requests.get(URL_REQ).content)
+    for req in requests_list:
+        req_id = req['id']
+        if req_id == id:
+            return req 
     return []
 

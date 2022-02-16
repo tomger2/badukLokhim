@@ -9,6 +9,7 @@ STATE = None
 SUB_STATE = None
 
 from elder_signup import *
+from close_request import *
 
 app = Flask(__name__)
 
@@ -40,7 +41,11 @@ def bot():
             
         # elif incoming_msg == 'פתיחת פנייה':
             
-        # elif incoming_msg == 'דירוג בעל מקצוע':
+        elif incoming_msg == 'דירוג בעל מקצוע':
+            msg = 'הכנס מספר פנייה לדירוג : '
+            response.message(msg)
+            STATE = BotState.HANDYMAN_RATING
+            responded = True
 
     elif STATE is BotState.MAIN_ACTION:
         if incoming_msg == 'נכד דיגיטלי':
@@ -60,6 +65,9 @@ def bot():
     elif STATE is BotState.ELDER_SIGNUP:
         grandson, response, responded, STATE, SUB_STATE = process_elder_signup(incoming_msg, STATE, SUB_STATE)
  
+    elif STATE is BotState.HANDYMAN_RATING:
+        response, responded = process_close_request(incoming_msg, response, responded)
+        
     if not responded:
        response.message(':) נסה בבקשה להיצמד לפורמט המבוקש')
     
