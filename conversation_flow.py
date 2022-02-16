@@ -8,16 +8,6 @@ class BotState(Enum):
     ELDER_REQUEST = 4
     HANDYMAN_RATING = 5
     MAIN_ACTION = 6
-
-class ELDER_SIGNUP_STATE(Enum):
-    START = 1
-    ASK_NAME = 2
-    ASK_AGE = 3
-    ASK_CITY = 4
-    ASK_PHONE = 5
-    ASK_ELDER_NAME = 6
-    ASK_ELDER_CITY = 7
-    ASK_ELDER_PHONE = 8
     
     
 # conversation = {

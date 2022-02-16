@@ -3,17 +3,18 @@ from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
 
-from conversation_flow import BotState, ELDER_SIGNUP_STATE 
+from conversation_flow import BotState 
+
+STATE = None
+SUB_STATE = None
 
 from elder_signup import *
 
 app = Flask(__name__)
 
-STATE = None
-
 @app.route('/bot', methods=['POST'])
 def bot():
-    global STATE, SUB_STATE, elder_name
+    global STATE, SUB_STATE
     incoming_msg = request.values.get('Body', '')
     response = MessagingResponse()
     responded = False
