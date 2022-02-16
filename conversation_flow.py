@@ -5,8 +5,8 @@ class BotState(Enum):
     START = 1
     ELDER_SIGNUP = 2
     HANDYMAN_SIGNUP = 3
-    ELDER_REQUEST = 4
-    HANDYMAN_RATING = 5
+    OPEN_REQUEST = 4
+    CLOSE_REQUEST = 5
     MAIN_ACTION = 6
     
 

@@ -86,8 +86,6 @@ def get_profession_list():
         prof_string_list = prof_string_list + [prof['title']]
     return prof_string_list
 
-
-get_profession_list()
 '''
 def push_rating(rate, request):
  '''   

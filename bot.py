@@ -11,6 +11,7 @@ SUB_STATE = None
 from elder_signup import *
 from handyman_signup import *
 from close_request import *
+from open_request import *
 
 app = Flask(__name__)
 
@@ -27,7 +28,7 @@ def bot():
         msg = 'הקלד בבקשה את הפעולה הרצויה: \n'
         msg += '1. הרשמה \n'
         msg += '2. פתיחת פנייה \n'
-        msg += '3. דירוג בעל מקצוע \n'
+        msg += '3. סגירת פנייה \n'
         response.message(msg)
         STATE = BotState.START
         responded = True
@@ -40,12 +41,18 @@ def bot():
             STATE = BotState.MAIN_ACTION
             responded = True
             
-        # elif incoming_msg == 'פתיחת פנייה':
-            
-        elif incoming_msg == 'דירוג בעל מקצוע':
-            msg = 'הכנס מספר פנייה לדירוג : '
+        elif incoming_msg == 'פתיחת פנייה':
+            msg = 'הכנס את מספר הפלאפון של הנכד הדיגיטלי:'
             response.message(msg)
-            STATE = BotState.HANDYMAN_RATING
+            STATE = BotState.OPEN_REQUEST
+            SUB_STATE = OPEN_REQUEST_STATE.ASK_PHONE
+            responded = True
+            
+        elif incoming_msg == 'סגירת פנייה':
+            msg = 'הכנס מספר פנייה:'
+            response.message(msg)
+            STATE = BotState.CLOSE_REQUEST
+            SUB_STATE = CLOSE_REQUEST_STATE.ASK_ID
             responded = True
 
     elif STATE is BotState.MAIN_ACTION:
@@ -71,8 +78,8 @@ def bot():
     elif STATE is BotState.HANDYMAN_SIGNUP:
         handyman, response, responded, STATE, SUB_STATE = process_handyman_signup(incoming_msg, STATE, SUB_STATE)
 
-    elif STATE is BotState.HANDYMAN_RATING:
-        response, responded = process_close_request(incoming_msg, STATE, SUB_STATE)
+    elif STATE is BotState.CLOSE_REQUEST:
+        response, responded, STATE, SUB_STATE = process_close_request(incoming_msg, STATE, SUB_STATE)
         
     if not responded:
        response.message('נסה בבקשה להיצמד לפורמט המבוקש :)')
