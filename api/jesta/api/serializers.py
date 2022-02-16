@@ -6,7 +6,7 @@ from .models import Call, Elder, Pro, Son, Profession
 class ElderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Elder
-        fields = ('name', 'age', 'city', 'address', 'private_home', 'apartment_num', 'floor', 'phone')
+        fields = ('name', 'age', 'city', 'address', 'private_home', 'apartment_num', 'floor', 'phone', 'id')
 
 class SonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,12 +16,12 @@ class SonSerializer(serializers.HyperlinkedModelSerializer):
 class ProfessionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Profession
-        fields = ('title',)
+        fields = ('title', 'id')
 
 class ProSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pro
-        fields = ('name', 'active_cities', 'phone', 'id', 'profession', 'rank', 'num_of_calls')
+        fields = ('name', 'active_cities', 'phone', 'id', 'profession', 'rank', 'num_of_calls', 'reviews')
 
 class CallSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
