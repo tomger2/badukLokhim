@@ -6,6 +6,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 from conversation_flow import BotState, ELDER_SIGNUP_STATE 
 
 from elder_signup import *
+from close_request import *
 
 app = Flask(__name__)
 
@@ -39,7 +40,11 @@ def bot():
             
         # elif incoming_msg == 'פתיחת פנייה':
             
-        # elif incoming_msg == 'דירוג בעל מקצוע':
+        elif incoming_msg == 'דירוג בעל מקצוע':
+            msg = 'הכנס מספר פנייה לדירוג : '
+            response.message(msg)
+            STATE = BotState.HANDYMAN_RATING
+            responded = True
 
     elif STATE is BotState.MAIN_ACTION:
         if incoming_msg == 'נכד דיגיטלי':
@@ -58,7 +63,9 @@ def bot():
             
     elif STATE is BotState.ELDER_SIGNUP:
         grandson, response, responded = process_elder_signup(incoming_msg, response, responded)
- 
+    
+    elif STATE is BotState.HANDYMAN_RATING:
+        response, responded = process_close_request(incoming_msg, response, responded)
     if not responded:
        response.message(':) נסה בבקשה להיצמד לפורמט המבוקש')
     
