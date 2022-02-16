@@ -22,6 +22,7 @@ def register_son(son, elder_phone):
     requests.post(URL_SONS, data=reg_son)
 
 
+
 '''
 register_pro
 input : new pro details 
@@ -53,6 +54,15 @@ def register_elder(elder):
     }
     r = requests.post(URL_ELDERS, data=reg_elder)
 
+
+
+'''
+def register_call(son, description, handyman, start_date, destination):
+    
+'''
+
+
+
 '''
 get elder information using name
 input : new pro details : first name, last name
@@ -68,6 +78,20 @@ def get_son(phone):
             return son          
     return []
 
+
+def get_son_url(phone):
+    son = get_son(phone)
+    return URL_SONS + son['id'] + '/'
+
+
+def get_open_calls_for_son(phone):
+    res = []
+    son_url = get_son_url(phone)
+    call_list = json.loads(requests.get(URL_REQ).content)
+    for call in call_list:
+        if call['grandson'] == son_url:
+            res = res + [call]
+    return res
 
 def get_elder_id(phone):
     elders_list = json.loads(requests.get(URL_ELDERS).content)
