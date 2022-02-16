@@ -62,6 +62,7 @@ class Call(models.Model):
     start_date = models.DateField()
     closed_date = models.DateField(null=True, blank=True)
     destination = models.JSONField()
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
         return 'Call for: ' + self.elder.name + ' in ' + self.elder.city
