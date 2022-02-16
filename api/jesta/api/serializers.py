@@ -26,4 +26,4 @@ class ProSerializer(serializers.HyperlinkedModelSerializer):
 class CallSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Call
-        fields = ('elder', 'grandson', 'is_open', 'is_occupied', 'description', 'handy_man_pool', 'handy_man', 'cost', 'start_date', 'closed_date', 'destination', 'profession')
+        fields = ('elder', 'grandson', 'is_open', 'is_occupied', 'description', 'handy_man_pool', 'handy_man', 'cost', 'start_date', 'closed_date', 'destination', 'profession', 'id')
