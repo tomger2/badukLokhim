@@ -19,7 +19,7 @@ class ELDER_SIGNUP_STATE(Enum):
     ASK_ELDER_CITY = 7
     ASK_ELDER_PHONE = 8
     
-    
+
 # conversation = {
 #     BotState.ELDER_SIGNUP : [('שם', 'הכנס את השם המלא שלך'), ('פלאפון', 'הכנס את מספר הפלאפון שלך')] 
 # }
