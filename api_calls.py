@@ -40,7 +40,6 @@ def register_pro(pro):
     requests.post(URL_PRO, data=reg_pro)
     
 
-
 def register_elder(elder):
     reg_elder = {
         "name": elder['name'],
@@ -53,6 +52,12 @@ def register_elder(elder):
         "phone": elder['phone']
     }
     r = requests.post(URL_ELDERS, data=reg_elder)
+
+
+def add_pro_review(pro_id, review):
+    url = URL_PRO + pro_id + '/'
+    pro = json.loads(requests.get(url).content)
+    r = requests.patch(url , data={"reviews": pro['reviews'] + [review]})
 
 
 
