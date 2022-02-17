@@ -56,11 +56,20 @@ def register_elder(elder):
 
 
 
-'''
-def register_call(son, description, handyman, start_date, destination):
+def register_call(son, description, start_date, destination, handy_pool, profession):
+    reg_call = {
+        "elder": son['elder'],
+        "grandson": URL_SONS + son['id'] + '/',
+        "is_open": True,
+        "is_occupied": False,
+        "description": description,
+        "handy_man_pool": handy_pool,
+        "start_date": start_date,
+        "destination": destination,
+        "profession": profession
+    }
+    requests.post(URL_REQ, data=reg_call)
     
-'''
-
 
 
 '''
