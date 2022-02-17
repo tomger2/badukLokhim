@@ -78,6 +78,14 @@ def get_son(phone):
             return son          
     return []
 
+def get_pro(phone):
+    pros_list = json.loads(requests.get(URL_PRO).content)
+    for pro in pros_list:
+        pro_phone = pro['phone']
+        if pro_phone == phone : 
+            return pro          
+    return []
+
 
 def get_son_url(phone):
     son = get_son(phone)
@@ -178,6 +186,17 @@ def calls_by_son_phone(phone):
     return son_calls
 
 
+def is_son_exist(phone):
+    son = get_son(phone)
+    if son == []:
+        return False
+    return True
+
+def is_handyman_exist(phone):
+    pro = get_pro(phone)
+    if pro == []:
+        return False
+    return True
 '''
 def get_call_id_from_json(call_json):
    ''' 
