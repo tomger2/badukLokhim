@@ -197,6 +197,15 @@ def is_handyman_exist(phone):
     if pro == []:
         return False
     return True
+
+
+def handy_url_list_create(handymans):
+    url_list = []
+    for handyman in handymans:
+        url_list = url_list + [URL_REQ + handyman['id'] + '/']
+    
+    return url_list
+    
 '''
 def get_call_id_from_json(call_json):
    ''' 
