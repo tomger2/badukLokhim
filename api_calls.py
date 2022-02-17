@@ -140,6 +140,19 @@ def display_pro(pro):
                 + 'ביקורות:' + pro['reviews']
 
 
+def display_call_child(call):
+    if call['is_occupied']:
+        handy_json = json.loads(requests.get(call['handy_man']).content)
+        return 'עובד מבצע'+ handy_json + 'תיאור:' + call['description'] + '\n' + 'תאריך לביצוע:' + call['destination']
+    else:
+        return 'תיאור:' + call['description'] + '\n' + 'תאריך לביצוע:' + call['destination']
+
+def display_call_handyman(call):
+    son_json = json.loads(requests.get(call['grandson']).content)
+    elder_json = json.loads(requests.get(call['elder']).content)
+    return 'ילד:'+ son_json + '\n' + 'קשיש:' + elder_json + '\n' + 'תיאור:' + call['description'] + '\n' + 'תאריך לביצוע:' + call['destination']
+
+
 def close_call(call):
     id = call['id']
     url = URL_REQ + id + '/'
