@@ -152,6 +152,43 @@ def update_ranking(pro, rank):
 
 
 
+def calls_by_handyman_phone(phone):
+    handy_calls = []
+    call_list = json.loads(requests.get(URL_REQ).content)
+    for call in call_list:
+        call_handymans = call["handy_man_pool"]
+        for hcall in call_handymans:
+            handymans_call = json.loads(requests.get(hcall).content)
+            if handymans_call['phone'] == phone:
+                if call['is_occupied'] == False:
+                    handy_calls = handy_calls + [call]
+
+    return handy_calls
+
+
+def calls_by_son_phone(phone):
+    son_calls = []
+    call_list = json.loads(requests.get(URL_REQ).content)
+    for call in call_list:
+        call_son = call["grandson"]
+        son_call = json.loads(requests.get(call_son).content)
+        if son_call['phone'] == phone:
+            son_calls = son_calls + [call]
+
+    return son_calls
+
+
+'''
+def get_call_id_from_json(call_json):
+   ''' 
+
+def occupy_call(call):
+    occ_id = call['id']
+    url = URL_REQ + occ_id + '/'
+    r = requests.patch(url , data={"is_occupied": True})
+    
+    
+    
 '''register_elder({
         "name": "2יוסי",
         "age" : 5,
@@ -167,3 +204,4 @@ register_son({"name" : "דני",
         "phone": "00000"}, '052-222223')
         
         '''
+        
